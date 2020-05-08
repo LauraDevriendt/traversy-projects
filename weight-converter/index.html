@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Converter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+       body{
+        margin-top:70px;
+        background:#333;
+        color:#fff;
+        
+        }
+
+        .card-success{
+            background: rgb(50, 167, 50);
+        }
+
+        .card-danger{
+            background: rgb(207, 72, 72);
+        }
+
+        .card-primary{
+            background: rgb(69, 69, 209);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <h1 class="display-4 text-center mb-3">Weight Converter</h1>
+            <form>
+              <div class="form-group">
+                <select id="converterChoice">
+                    <option>select option</option>
+                    <option>Pounds</option>
+                    <option>Grams</option>
+                    <option>Kilograms</option>
+                    <option>Ounces</option>
+                    
+                </select>
+                <input id="input" name='input'type="number" class="form-control form-control-lg" placeholder="Choose which you want to convert...">
+              </div>
+            </form>
+            <div id="output">
+              <div class="card card-primary mb-2">
+                <div class="card-block">
+                  <h4 id="Grams">Grams:</h4>
+                  <div id="gramsOutput"></div>
+                </div>
+              </div>
+      
+              <div class="card card-success mb-2">
+                <div class="card-block">
+                  <h4 id='Kilograms'>Kilograms:</h4>
+                  <div id="kgOutput"></div>
+                </div>
+              </div>
+      
+              <div class="card card-danger mb-2">
+                <div class="card-block">
+                  <h4 id='Ounces'>Ounces:</h4>
+                  <div id="ozOutput"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+<script>
+
+  // make cards invisible
+  document.getElementById('output').style.visibility ='hidden';
+
+  // when option is selected to convert following function will begin
+  let converterChoice=document.getElementById('converterChoice');
+  converterChoice.addEventListener('input',function(e){
+
+    // clear the cards and input and Hidd cards again
+    document.getElementById('input').value='';
+
+    document.getElementById('gramsOutput').innerHTML = "";
+    document.getElementById('kgOutput').innerHTML = "";
+    let ozOutput=document.querySelector('#ozOutput');
+    ozOutput.innerHTML="";
+  
+    document.getElementById('output').style.visibility ='hidden';
+    
+    //when grams/pounds/kilograms or ounces is selected convertion starts
+    if(e.target.value==="Grams"){
+        
+      // change input placeholder
+      document.getElementById('input').placeholder='Enter Grams...';
+
+      // Event to convert and set names of cards right
+      document.getElementById('input').addEventListener('input',function(e){
+            
+        document.getElementById('output').style.visibility ='visible'; 
+
+        let makePounds=document.getElementById('Grams');
+        makePounds.innerHTML="Pounds:"
+        document.getElementById('Kilograms').innerHTML="Kilograms:";
+        document.getElementById('Ounces').innerHTML="Ounces:";
+
+        let grams=e.target.value;
+        document.getElementById('gramsOutput').innerHTML = grams*0.00220462262;
+        document.getElementById('kgOutput').innerHTML = grams/1000;
+        let ozOutput=document.querySelector('#ozOutput');
+        ozOutput.innerHTML=grams*0.0352739619;
+        });
+    }else if(e.target.value==="Kilograms"){
+      // change input placeholder
+      document.getElementById('input').placeholder='Enter Kilograms...';
+
+      // Event to convert and set names of cards right
+      document.getElementById('input').addEventListener('input',function(e){
+        document.getElementById('output').style.visibility ='visible';
+
+        let makePounds=document.getElementById('Kilograms');
+        makePounds.innerHTML="Pounds:"
+        document.getElementById('Grams').innerHTML="Grams:";
+        document.getElementById('Ounces').innerHTML="Ounces:";
+
+        let kilograms=e.target.value;
+
+        document.getElementById('gramsOutput').innerHTML = kilograms*1000;
+        
+        document.getElementById('kgOutput').innerHTML = kilograms*2.20462262;
+
+        let ozOutput=document.querySelector('#ozOutput');
+        ozOutput.innerHTML=kilograms*35.2739619;
+        });
+    }else if(e.target.value==="Pounds"){
+      // change input placeholder
+      document.getElementById('input').placeholder='Enter Pounds...';
+
+      // Event to convert and set names of cards right
+      document.getElementById('input').addEventListener('input',function(e){
+        document.getElementById('output').style.visibility ='visible';
+
+        let makePounds=document.getElementById('Ounces');
+        makePounds.innerHTML="Ounces:"
+        document.getElementById('Grams').innerHTML="Grams:";
+        document.getElementById('Kilograms').innerHTML="Kilograms:";
+
+        let pounds=e.target.value
+
+        document.getElementById('gramsOutput').innerHTML = pounds/0.0022046;
+        
+        document.getElementById('kgOutput').innerHTML = pounds/2.20462262;
+
+        let ozOutput=document.querySelector('#ozOutput');
+        ozOutput.innerHTML=pounds*16;
+      });
+    }else {
+      // change input placeholder
+      document.getElementById('input').placeholder='Enter Ounces...';
+      
+      // Event to convert and set names of cards right
+      document.getElementById('input').addEventListener('input',function(e){
+        document.getElementById('output').style.visibility ='visible';
+
+        let makePounds=document.getElementById('Ounces');
+        makePounds.innerHTML="Pounds:"
+        document.getElementById('Grams').innerHTML="Grams:";
+        document.getElementById('Kilograms').innerHTML="Kilograms:";
+
+        let ounces=e.target.value;
+
+        document.getElementById('gramsOutput').innerHTML = ounces*28.3495231;
+        
+        document.getElementById('kgOutput').innerHTML = ounces*0.0283495231 ;
+
+        let ozOutput=document.querySelector('#ozOutput');
+        ozOutput.innerHTML=ounces*0.0625;
+      
+      });
+
+    }  
+  });
+
+</script>
+</body>
+</html>
